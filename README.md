@@ -1,15 +1,8 @@
-Below is a **full GitHub README.md** written to be **extremely clear, very detailed, beginner-friendly (10-year-old level)**, and **professionally structured**.
-It is **well over 2000 words**, accurate, and **fully replicable** based on everything we discussed.
-
-You can **copy-paste this directly into your GitHub repo as `README.md`**.
 
 ---
 
-# 🚀 WEEK 6 PROJECT
-
-## Serverless & Event-Driven Architecture on AWS
-
-### Function-as-a-Service (FaaS) Using AWS Lambda
+## Serverless & Event-Driven Architecture on AWS. Function-as-a-Service (FaaS) Using AWS Lambda
+![Architecture Diagram](https://i.postimg.cc/8cqg3zbF/Whats-App-Image-2025-12-17-at-11-25-08.jpg)
 
 ---
 
@@ -47,20 +40,9 @@ You can **copy-paste this directly into your GitHub repo as `README.md`**.
 ---
 
 ## 1️⃣ Introduction
-
-Welcome to the **WEEK 6 Serverless & Event-Driven Architecture Project**.
-
 This repository contains a **complete beginner-friendly guide** to building a **real, production-style serverless backend** using **Amazon Web Services (AWS)**.
 
-This project is written so clearly that:
-
-* A **child can follow it step by step**
-* A **beginner with zero cloud experience** can succeed
-* A **student can submit it as coursework**
-* A **professional can use it as a reference**
-
-You will build a backend that:
-
+We build a backend that:
 * Runs **without servers**
 * Reacts automatically to **events**
 * Scales automatically without configuration
@@ -69,16 +51,11 @@ You will build a backend that:
 ---
 
 ## 2️⃣ What This Project Is About
-
-This project focuses on **Function-as-a-Service (FaaS)** using **AWS Lambda**.
-
-You will create:
-
+We will create:
 * A **Lambda function**
 * A **public API endpoint** using API Gateway
 * **Event triggers** using S3 and SQS
 * **Monitoring logs** using CloudWatch
-
 All of this works together to form an **event-driven backend system**.
 
 ---
@@ -86,19 +63,16 @@ All of this works together to form an **event-driven backend system**.
 ## 3️⃣ What “Serverless” Really Means (Very Simple)
 
 ### ❌ What Serverless Is NOT
-
 * It does **not** mean there are no computers
 * It does **not** mean magic
 
 ### ✅ What Serverless IS
-
 * You do **not manage servers**
 * You do **not install operating systems**
 * You do **not handle scaling**
 * You only write **code**
 
 AWS handles:
-
 * Servers
 * Scaling
 * Patching
@@ -106,7 +80,6 @@ AWS handles:
 * Security infrastructure
 
 You only care about:
-
 ```text
 WHEN something happens → RUN my code
 ```
@@ -116,18 +89,14 @@ WHEN something happens → RUN my code
 ## 4️⃣ What “Event-Driven” Really Means
 
 An **event** is simply:
-
 > “Something happened”
-
 Examples:
-
 * A user clicks a button
 * A file is uploaded
 * A message is sent
 * An API is called
 
 In this project:
-
 * HTTP request → Event
 * File upload → Event
 * Queue message → Event
@@ -182,20 +151,8 @@ Before starting, you must have:
 
 ---
 
-## 8️⃣ AWS Account Setup
-
-1. Go to [https://aws.amazon.com](https://aws.amazon.com)
-2. Create an AWS account
-3. Log in to **AWS Management Console**
-4. Choose a region (example: `us-east-1`)
-5. Always use the **same region** for all services
-
----
-
 ## 9️⃣ Step 1 – Creating the Lambda Function
-
 ### Open Lambda
-
 1. In AWS Console search for **Lambda**
 2. Click **Lambda**
 3. Click **Create function**
@@ -203,23 +160,25 @@ Before starting, you must have:
 ### Configure Function
 
 * Author from scratch
-* Function name:
-
+* Function name. e.g.:
   ```
   week6-serverless-function
   ```
-* Runtime:
+* Runtime. e.g.:
 
   ```
   Python 3.12
   ```
 * Architecture:
-
   ```
   x86_64
   ```
 
+![lambda](https://i.postimg.cc/RFxBXFXN/Screenshot-2025-12-18-181429.png)
+
 Click **Create function**
+
+![lambda](https://i.postimg.cc/nrdNbcYf/Screenshot-2025-12-16-175351.png)
 
 ---
 
@@ -239,6 +198,7 @@ def lambda_handler(event, context):
         })
     }
 ```
+![lambda](https://i.postimg.cc/SNJvY4fz/Screenshot-2025-12-16-175853.png)
 
 Click **Deploy**
 
@@ -256,43 +216,47 @@ Expected result:
 ```
 Status: Succeeded
 ```
+![lambda](https://i.postimg.cc/NFVbkykN/Screenshot-2025-12-16-180029.png)
 
 ---
 
 ## 1️⃣2️⃣ Step 4 – Creating API Gateway
 
-1. Search **API Gateway**
+1. Search **API Gateway** or within Lambda, create a trigger
 2. Click **Create API**
 3. Choose **HTTP API**
 4. Click **Build**
 
+![lambda](https://i.postimg.cc/J792Xg6q/Screenshot-2025-12-16-182444.png)
+
 ---
 
 ## 1️⃣3️⃣ Step 5 – Connecting API Gateway to Lambda
+Set API name
+Default deployment stage
+![lambda](https://i.postimg.cc/4Ng1sTFz/Screenshot-2025-12-16-182512.png)
 
 * Integration target: **Lambda**
 * Lambda function:
-
   ```
   week6-serverless-function
   ```
 
-Route:
-
-```
-GET /hello
-```
 
 Click **Create**
+
+![lambda](https://i.postimg.cc/3NH28g1B/Screenshot-2025-12-16-182532.png)
 
 ---
 
 ## 1️⃣4️⃣ Step 6 – Testing the API Endpoint
-
-1. Copy **Invoke URL**
+1. Copy Invoke URL/API Endpoint
 2. Paste into browser
+![lambda](https://i.postimg.cc/m2gtQXPq/Screenshot-2025-12-16-182659.png)
 
 You should see JSON response.
+
+![lambda](https://i.postimg.cc/2y887ySS/Screenshot-2025-12-16-182711.png)
 
 ---
 
@@ -300,19 +264,20 @@ You should see JSON response.
 
 1. Open **S3**
 2. Click **Create bucket**
-3. Name:
-
+3. Name. e.g.:
    ```
    week6-event-bucket-unique
    ```
+  ![S3](https://i.postimg.cc/6QtsvS3t/Screenshot-2025-12-16-183237.png)
+  
 4. Same region as Lambda
 5. Click **Create bucket**
-
+![S3](https://i.postimg.cc/8zd9NHHG/Screenshot-2025-12-16-183345.png)
 ---
 
 ## 1️⃣6️⃣ Step 8 – Connecting S3 Events to Lambda
 
-Update Lambda code:
+Update Lambda code. e.g.:
 
 ```python
 def lambda_handler(event, context):
@@ -326,18 +291,25 @@ def lambda_handler(event, context):
     }
 ```
 
-Add trigger:
+![S3](https://i.postimg.cc/vB1dYnT3/Screenshot-2025-12-16-194454.png)
 
+
+Add trigger:
 * Service: S3
 * Event: Object Created
-
+![S3](https://i.postimg.cc/RhzpkJH5/Screenshot-2025-12-16-184926.png)
 ---
+
+
 
 ## 1️⃣7️⃣ Step 9 – Testing S3 Event Trigger
 
 Upload any file to the bucket.
+![Testing S3 trigger](https://i.postimg.cc/2ywGgcYM/Screenshot-2025-12-16-185909.png)
 
-Lambda runs automatically.
+Lambda runs automatically. Cloudwatch logs it
+![Testing S3 trigger](https://i.postimg.cc/zBqR4JfN/Screenshot-2025-12-16-195538.png)
+![Testing S3 trigger](https://i.postimg.cc/MHvX8X2d/Screenshot-2025-12-16-195615.png)
 
 ---
 
@@ -351,6 +323,11 @@ Lambda runs automatically.
    ```
    week6-event-queue
    ```
+![Testing S3 trigger](https://i.postimg.cc/Pxq5mNxk/Screenshot-2025-12-16-200131.png)
+
+Click Create
+![Testing S3 trigger](https://i.postimg.cc/90RXnSZS/Screenshot-2025-12-16-200215.png)
+
 
 ---
 
@@ -360,8 +337,16 @@ Lambda runs automatically.
 2. Add trigger
 3. Select SQS
 4. Choose queue
+![Testing S3 trigger](https://i.postimg.cc/8zDJ7phG/Screenshot-2025-12-16-200333.png)
+
+Click create trigger
+![Testing S3 trigger](https://i.postimg.cc/sgVxVnr9/Screenshot-2025-12-16-201606.png)
 
 ---
+
+Create a role, name it, and attach the AWSLambdaSQSQueueExecutionRole policy
+![Testing S3 trigger](https://i.postimg.cc/90WK4qFY/Screenshot-2025-12-16-201737.png)
+
 
 ## 2️⃣0️⃣ Step 12 – Testing SQS Trigger
 
@@ -372,6 +357,7 @@ Hello Lambda from SQS!
 ```
 
 Lambda runs automatically.
+![Testing S3 trigger](https://i.postimg.cc/15d7Sd6K/Screenshot-2025-12-16-203241.png)
 
 ---
 
@@ -386,12 +372,16 @@ Lambda runs automatically.
    ```
 
 You will see logs for:
-
 * API calls
 * S3 uploads
 * SQS messages
+* 
+![Testing S3 trigger](https://i.postimg.cc/rmqQg2Xr/Screenshot-2025-12-16-202837.png)
+
 
 ---
+
+
 
 ## 2️⃣2️⃣ Automatic Scaling Explained
 
@@ -414,18 +404,6 @@ AWS Lambda:
 
 ---
 
-## 2️⃣4️⃣ Screenshots Required
-
-Take screenshots of:
-
-* Lambda function
-* API Gateway route
-* S3 bucket trigger
-* SQS queue trigger
-* CloudWatch logs
-
----
-
 ## 2️⃣5️⃣ Common Errors and Fixes
 
 | Error                | Fix             |
@@ -433,30 +411,6 @@ Take screenshots of:
 | Lambda not triggered | Check trigger   |
 | API returns 500      | Check logs      |
 | Wrong region         | Use same region |
-
----
-
-## 2️⃣6️⃣ Final Deliverables Checklist
-
-✅ Lambda function
-✅ API Gateway endpoint
-✅ S3 trigger
-✅ SQS trigger
-✅ CloudWatch logs
-✅ Event-driven architecture
-
----
-
-## 2️⃣7️⃣ What You Have Learned
-
-* Serverless computing
-* Event-driven systems
-* AWS Lambda
-* API Gateway
-* S3 events
-* SQS messaging
-* CloudWatch monitoring
-* Automatic scaling
 
 ---
 
@@ -470,17 +424,3 @@ Take screenshots of:
 
 ---
 
-## 🎉 Final Statement
-
-This project demonstrates a **complete serverless, event-driven backend** built using AWS managed services, showcasing modern cloud architecture patterns with **zero server management**.
-
----
-
-If you want, I can:
-
-* Convert this to **PDF**
-* Add **architecture diagram image**
-* Add **IAM explanation**
-* Turn it into a **graded submission**
-
-Just tell me 👍
